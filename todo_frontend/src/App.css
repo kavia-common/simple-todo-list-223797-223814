@@ -1,104 +1,201 @@
-/* CSS Variables for Theme Management */
+/* Ocean Professional Theme */
 :root {
-  /* Light theme colors */
-  --bg-primary: #ffffff;
-  --bg-secondary: #f8f9fa;
-  --text-primary: #282c34;
-  --text-secondary: #61dafb;
-  --border-color: #e9ecef;
-  --button-bg: #007bff;
-  --button-text: #ffffff;
+  --primary: #2563EB;
+  --amber: #F59E0B;
+  --error: #EF4444;
+  --bg: #f9fafb;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --border: #e5e7eb;
+  --shadow: 0 10px 20px rgba(17, 24, 39, 0.08);
+  --radius: 12px;
+  --focus: 0 0 0 3px rgba(37, 99, 235, 0.35);
 }
 
-[data-theme="dark"] {
-  /* Dark theme colors */
-  --bg-primary: #1a1a1a;
-  --bg-secondary: #282c34;
-  --text-primary: #ffffff;
-  --text-secondary: #61dafb;
-  --border-color: #404040;
-  --button-bg: #0056b3;
-  --button-text: #ffffff;
+html, body, #root {
+  height: 100%;
 }
 
-.App {
-  text-align: center;
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
+.ocean-app {
   min-height: 100vh;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: linear-gradient(180deg, rgba(59,130,246,0.08), rgba(249,250,251,1));
+  color: var(--text);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.ocean-header {
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(243, 244, 246, 0.2));
+  border-bottom: 1px solid var(--border);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.ocean-container {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
 }
 
-.App-header {
-  background-color: var(--bg-secondary);
-  min-height: 100vh;
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+}
+
+.card-header {
+  padding: 4px 4px 12px 4px;
+  margin-bottom: 6px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: var(--text-primary);
-  transition: background-color 0.3s ease;
-  position: relative;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: var(--text-secondary);
-  transition: color 0.3s ease;
+.card-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
 }
 
-.theme-toggle {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background-color: var(--button-bg);
-  color: var(--button-text);
+.input-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.input {
+  flex: 1;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fff;
+  color: var(--text);
+  font-size: 16px;
+  transition: box-shadow .2s ease, border-color .2s ease;
+}
+
+.input:focus {
+  outline: none;
+  border-color: rgba(37, 99, 235, 0.5);
+  box-shadow: var(--focus);
+}
+
+.btn {
   border: none;
-  border-radius: 8px;
-  padding: 10px 20px;
-  font-size: 14px;
+  border-radius: 10px;
+  padding: 10px 14px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform .12s ease, box-shadow .2s ease, background .2s ease, color .2s ease;
+  box-shadow: var(--shadow);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.theme-toggle:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  opacity: 0.9;
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus);
 }
 
-.theme-toggle:active {
-  transform: translateY(0);
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.btn-amber {
+  background: var(--amber);
+  color: #111827;
 }
 
-/* Responsive design for mobile */
-@media (max-width: 768px) {
-  .theme-toggle {
-    top: 10px;
-    right: 10px;
-    padding: 8px 16px;
-    font-size: 12px;
-  }
+.btn-danger {
+  background: var(--error);
+  color: #fff;
+}
+
+.btn-ghost {
+  background: #fff;
+  border: 1px solid var(--border);
+  color: var(--text);
+  box-shadow: none;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  margin-bottom: 10px;
+  background: #fff;
+  transition: background .2s ease, box-shadow .2s ease, transform .1s ease;
+}
+
+.todo-item:hover {
+  box-shadow: var(--shadow);
+}
+
+.todo-title {
+  flex: 1;
+  color: var(--text);
+}
+
+.todo-title.completed {
+  text-decoration: line-through;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  gap: 6px;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary);
+}
+
+.error {
+  background: #FEF2F2;
+  color: #991B1B;
+  border: 1px solid #FECACA;
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.info.subtle {
+  background: #F3F4F6;
+  color: #374151;
+  border: 1px solid var(--border);
+  padding: 10px 12px;
+  border-radius: 10px;
+  margin-top: 8px;
+}
+
+.ocean-footer {
+  text-align: center;
+  padding: 32px 16px;
+  color: var(--muted);
+}
+
+/* Utility - Visually hidden but accessible */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
 }

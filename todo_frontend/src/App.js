@@ -1,47 +1,76 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useEffect, useState } from 'react';
 import './App.css';
+import './index.css';
+import Header from './components/Header';
+import TodoForm from './components/TodoForm';
+import TodoList from './components/TodoList';
+import { useTodos } from './hooks/useTodos';
 
-// PUBLIC_INTERFACE
+/**
+ * PUBLIC_INTERFACE
+ * App - Single page Todo application entry component.
+ * Renders header, form, list, and actions with Ocean Professional styling.
+ */
 function App() {
-  const [theme, setTheme] = useState('light');
+  const {
+    todos,
+    addTodo,
+    updateTodo,
+    toggleTodo,
+    deleteTodo,
+    clearCompleted,
+    loading,
+    error,
+  } = useTodos();
 
-  // Effect to apply theme to document element
+  const [theme] = useState('light');
+
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
   }, [theme]);
 
-  // PUBLIC_INTERFACE
-  const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
-  };
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <button 
-          className="theme-toggle" 
-          onClick={toggleTheme}
-          aria-label={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}
-        >
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          Current theme: <strong>{theme}</strong>
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="ocean-app">
+      <Header />
+      <main className="ocean-container" aria-live="polite">
+        <section className="card" aria-labelledby="todo-section-title">
+          <div className="card-header">
+            <h2 id="todo-section-title" className="card-title">Your Tasks</h2>
+            <button
+              type="button"
+              className="btn btn-amber"
+              onClick={clearCompleted}
+              aria-label="Clear completed todos"
+            >
+              Clear Completed
+            </button>
+          </div>
+
+          <TodoForm onAdd={addTodo} />
+
+          {loading && (
+            <div role="status" aria-live="polite" className="info subtle">
+              Loading todos...
+            </div>
+          )}
+
+          {error && (
+            <div role="alert" className="error">
+              {error}
+            </div>
+          )}
+
+          <TodoList
+            todos={todos}
+            onToggle={toggleTodo}
+            onDelete={deleteTodo}
+            onUpdate={updateTodo}
+          />
+        </section>
+      </main>
+      <footer className="ocean-footer" aria-label="Footer">
+        <p>Todos are stored locally in your browser.</p>
+      </footer>
     </div>
   );
 }
